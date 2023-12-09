@@ -1,0 +1,74 @@
+<section class="vh-100 signup">
+  <div class="container h-100" >
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #3fefe6">Sign up</p>
+                <form id="signupForm" [formGroup]="formGroup" (keyup.enter)="SignUp()">
+                <form class="mx-1 mx-md-4" method="post" formGroupName="user">
+                  <div class="row">
+                    <div class="col-md-6">
+
+                      <div class="form-floating">
+                        <input formControlName="firstname" type="text" class="form-control" id="floatingFirstname" placeholder="First Name" name="firstname" required>
+                        <label for="floatingFirstname">First Name</label>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input formControlName="lastname" type="text" class="form-control" id="floatingLastname" placeholder="Last Name" name="lastname" required>
+                        <label for="floatingLastname">Last Name</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-floating">
+                    <input formControlName="email" type="email" class="form-control" id="floatingEmail" placeholder="Email" name="email" required>
+                    <label for="floatingEmail">Email</label>
+                  </div>
+                </form>
+                <form class="mx-1 mx-md-4" method="post" formGroupName="account">
+                  <div class="form-floating">
+                    <input  formControlName="username" type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" required>
+                    <label for="floatingInput">Username</label>
+                  </div>
+                  <div class="form-floating">
+                    <input [ngStyle]="{'border' : failed ? '2px solid red' :'none'}" formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                  <div class="form-floating">
+                    <input [ngStyle]="{'border' : failed ? '2px solid red' :'none'}" formControlName="confirm" type="password" class="form-control" id="floatingConfirm" placeholder="Confirm" name="repassword" required>
+                    <div *ngIf="failed" id="feedback" style="margin-bottom: 6px">
+                      <div class="invalid-feedback" style="display: flex; color: #fd4544">
+                        <span class="material-icons" style="font-size: 18px; margin-right: 3px">error</span>
+                        <div>Your password doens't match</div>
+                      </div>
+                    </div>
+                    <label for="floatingConfirm">Confirm</label>
+                  </div>
+                  <p class="mt-1 mb-3 " style="color: white">You already have an account
+                    <a routerLink="/account/signin" style="margin-left: 5px; color: #fd4544">Sign in</a>
+                  </p>
+                  <button form="signupForm" (click)="SignUp()" class="btn btn-outline-danger w-100 py-2" type="submit" style="background: #fd4544; color: #3fefe6; font-weight: 800">Sign up</button>
+                  <p class="mb-3 " style="margin-top: 25px; color: white" >© 2023 IMDBFAKE, Inc</p>
+                </form>
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img ngSrc="assets/image/signup.jpg"
+                     class="img-fluid" alt="Sample image" height="375" width="666">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

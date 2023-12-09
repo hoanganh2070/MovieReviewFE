@@ -1,0 +1,25 @@
+<div class="container" style="display: flex; margin-top: 70px; margin-bottom: 20px; justify-content: space-between;">
+    <h3 style="color: #fd4544; font-weight: 700;">Search</h3>
+    <div style="float: left;">
+      <span class="material-icons seven" id="three" role="button" aria-label="Previous">arrow_back_ios</span>
+      <span class="material-icons eight" id="four" role="button" aria-label="Next">arrow_forward_ios</span>
+    </div>
+  </div>
+
+  <div id="glidersearch" class="container glider draggable">
+    <div class="glider-track">
+      <div *ngFor="let movie of SearchList,index as i" class="card glider-slide" [attr.data-gslide]="i">
+        <a routerLink="/movie/{{movie.id}}" class="movie-poster">
+          <img [src]="movie.poster_path" class="card-img-top" alt="..." loading="lazy">
+        </a>
+        <div class="card-body">
+          <div>
+            <img src="assets/image/star.png" width="17px">
+            {{movie.vote_average}}
+          </div>
+          <h5 style="color: beige;">{{movie.title}}</h5>
+        </div>
+      </div>
+    </div>
+
+  </div>

@@ -1,0 +1,45 @@
+<div class="signin" style="vertical-align: middle">
+  <div class="container" style="margin-top: 6rem; padding: 1rem">
+    <div class="w-100 form-container" style="max-width: 400px;
+    box-sizing: border-box" >
+      <form (keyup.enter)= "SignIn()" id="signinForm" [formGroup]="formGroup"  method="post" >
+        <h1 class="h3 mb-3 mt-1 fw-normal" style="color: #3fefe6">Please sign in</h1>
+
+        <div class="form-floating">
+          <input [ngStyle]="{'border' : failed ? '2px solid red' :'none'}" formControlName="username" type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" required>
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating">
+          <input [ngStyle]="{'border' : failed ? '2px solid red' :'none'}" formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"  required>
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div id="feedback">
+          <div *ngIf="failed" class="invalid-feedback" style="display: flex">
+            <span class="material-icons" style="font-size: 18px; margin-right: 3px">error</span>
+            <div>Your username or password is wrong</div>
+          </div>
+        </div>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" id="remember" name="remember-me" style="width: 10%">
+            Remember me
+          </label>
+        </div>
+        <p class="mt-1 mb-3 ">You don't have an account
+          <a routerLink="/account/signup" style="margin-left: 5px; color: #fd4544">Sign up</a>
+        </p>
+      </form>
+      <p class="mt-1 mb-3 ">Or sign in with
+        <button (click)="googleSignIn()"  class="text-body-secondary oauth-button" style="text-decoration: none; margin-left: 5px;" >
+          <img ngSrc="assets/image/google.png" width="16" height="16">
+        </button>
+        <button (click)="facebookSignIn()" class="text-body-secondary oauth-button" >
+          <img ngSrc="assets/image/facebook.png" width="16" height="16" style="margin-left: 5px">
+        </button>
+      </p>
+
+      <button (click)="SignIn()" form="signinForm" class="btn btn-outline-danger w-100 py-2" type="submit">Sign in</button>
+      <p class="mb-3 " style="margin-top: 25px">© 2023 IMDBFAKE, Inc</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div *ngIf="true">
+  <div>
+    <img src="assets/image/poster.png" style="object-fit: contain; width: 100%;">
+  </div>
+
+  <div class="background-container">
+    <div class="container" style="display: flex; margin-bottom: 20px; justify-content: space-between;">
+      <h3 style="color: #3fefe6 ; font-weight: 700; margin-top: 25px;">Top Trending</h3>
+      <div style="float: left; margin-top: 25px;">
+        <span class="material-icons" id="one" role="button" aria-label="Previous">arrow_back_ios</span>
+        <span class="material-icons" id="two" role="button" aria-label="Next">arrow_forward_ios</span>
+      </div>
+    </div>
+    <div #glider id="glider1" class="container glider draggable">
+      <div class="glider-track">
+        <div *ngFor="let movie of trendingList; index as i" class="card glider-slide" [attr.data-gslide]="i">
+          <a (click)="movieDetails(movie.id,movie.title)" class="movie-poster">
+            <img [src]= "movie.poster_path" class="card-img-top" alt="...">
+          </a>
+          <div class="card-body">
+            <div>
+              <img src="assets/image/star.png" width="17px">
+              {{movie.vote_average}}
+            </div>
+            <h5 style="color: beige;">{{movie.title}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="display: flex; margin-top: 70px; margin-bottom: 20px; justify-content: space-between;">
+    <h3 style="color: #fd4544; font-weight: 700;">Top Rated Movies</h3>
+    <div style="float: left;">
+      <span class="material-icons" id="three" role="button" aria-label="Previous">arrow_back_ios</span>
+      <span class="material-icons" id="four" role="button" aria-label="Next">arrow_forward_ios</span>
+    </div>
+  </div>
+
+  <div id="glider" class="container glider draggable">
+    <div class="glider-track">
+      <div *ngFor="let movie of topratedMovies,index as i" class="card glider-slide" [attr.data-gslide]="i">
+        <a  (click)="movieDetails(movie.id,movie.title)" class="movie-poster">
+          <img [src]="movie.poster_path" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+          <div>
+            <img src="assets/image/star.png" width="17px">
+            {{movie.vote_average}}
+          </div>
+          <h5 style="color: beige;">{{movie.title}}</h5>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container" style="display: flex; margin-bottom: 20px; justify-content: space-between;">
+    <h3 style="color: #3fefe6 ; font-weight: 700; margin-top: 25px;">Up Coming</h3>
+    <div style="float: left; margin-top: 25px;">
+      <span class="material-icons" id="five" role="button" aria-label="Previous">arrow_back_ios</span>
+      <span class="material-icons" id="six" role="button" aria-label="Next">arrow_forward_ios</span>
+    </div>
+  </div>
+  <div #glider id="glider2" class="container glider draggable">
+    <div class="glider-track">
+      <div *ngFor="let movie of upcomingMovies; index as i" class="card glider-slide" [attr.data-gslide]="i">
+        <a (click)="movieDetails(movie.id,movie.title)" class="movie-poster">
+          <img [src]="movie.poster_path" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+          <div>
+            <img src="assets/image/star.png" width="17px">
+            {{movie.vote_average}}
+          </div>
+          <h5 style="color: beige;">{{movie.title}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
