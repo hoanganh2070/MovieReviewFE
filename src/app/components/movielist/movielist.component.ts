@@ -30,10 +30,7 @@ export class MovielistComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     if(this.route.snapshot.queryParams['token']){
       window.localStorage.setItem('token', this.route.snapshot.queryParams['token']);
-      this.router.navigateByUrl('/').then(() => {
-        window.location.reload();
-      });
-
+      window.location.href = '/';
     }
     else{
     this.fetchData();

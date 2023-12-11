@@ -1,5 +1,5 @@
 *{
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -435,8 +435,8 @@ div.scroll-container {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: white;
-  color: #e74c3c;
+  background: #1e2125;
+  color: #e743c;
   text-decoration:none;
   cursor: pointer;
   }
