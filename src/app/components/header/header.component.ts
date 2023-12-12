@@ -18,7 +18,14 @@ export class HeaderComponent implements OnInit {
 
   constructor(private accountService : AccountService,private router : Router,private titleService : Title) { 
     this.router = router;
-    if(window.localStorage.getItem('token')){
+    if(window.localStorage.getItem('token') === null){
+      const token = document.cookie.split(';')[0].split('=')[1];
+      if(token !== undefined){
+        window.localStorage.setItem('token',token);
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+      }
+    }
+    else {
       this.signedIn = true;
     }
   }
