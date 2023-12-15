@@ -1,5 +1,5 @@
 <div *ngIf="!loading" style="height: 600px; align-items: center;">
-<img class="backdrop" [src]="movie.backdrop_path" loading="eager">
+<img class="backdrop" [style.background]="'rgb(' + movie.backdrop_path[0] + ',' + movie.backdrop_path[1] + ',' + movie.backdrop_path[2] +  ',' + 0.5 + ')'" loading="eager">
 <div class="container movie-details" style="display: flex;">
     <img src={{movie.poster_path}} class="img-fluid" style="height: 330px !important;">
     <div class="movie-detail">
@@ -51,3 +51,4 @@
     </div>
 </div>
 <app-images *ngIf="!loading"></app-images>
+

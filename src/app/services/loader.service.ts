@@ -21,8 +21,9 @@ export class LoaderService {
   }
 
   requestEnded() {
-    this.count=0;
-    this.spinner$.next(false);
+    this.count=this.count-1;
+    if(this.count<=0)
+      this.spinner$.next(false);
   
   }
 

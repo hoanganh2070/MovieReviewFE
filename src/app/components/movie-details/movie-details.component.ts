@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -6,17 +6,19 @@ import { Movie } from 'src/app/model/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 
 
+
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
 })
-export class MovieDetailsComponent implements OnInit{
+export class MovieDetailsComponent implements OnInit,AfterViewInit{
 
   movie : Movie ;
   private movieService : MovieService;
   private route : ActivatedRoute;
   loading : boolean = true;
   trailer : SafeResourceUrl = '';
+  color1 : number = 197;
   
   
   showRatingStar : boolean = false;
@@ -30,16 +32,19 @@ export class MovieDetailsComponent implements OnInit{
     this.route = route;
    
   }
+  ngAfterViewInit(): void {
+    
+  }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let id = params['id'];
       this.movieService.getMovieDetails(id).subscribe(
          response => {
-            this.movie = response;
+            this.movie = response;          
             // @ts-ignore
             this.formGroup.get('rating').setValue(0);
+            
             this.loading = false;
-
          }
         )
     });

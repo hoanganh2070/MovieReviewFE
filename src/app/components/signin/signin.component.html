@@ -1,5 +1,5 @@
-<div class="signin" style="vertical-align: middle">
-  <div class="container" style="margin-top: 6rem; padding: 1rem">
+<div class="signin" style="vertical-align: middle; display: flex; align-items: center; height: 100vh;">
+  <div class="container" style=" padding: 1rem">
     <div class="w-100 form-container" style="max-width: 400px;
     box-sizing: border-box" >
       <form (keyup.enter)= "SignIn()" id="signinForm" [formGroup]="formGroup"  method="post" >
@@ -21,7 +21,7 @@
         </div>
         <div class="checkbox mb-3">
           <label>
-            <input type="checkbox" id="remember" name="remember-me" style="width: 10%">
+            <input type="checkbox" id="remember" name="remember-me">
             Remember me
           </label>
         </div>

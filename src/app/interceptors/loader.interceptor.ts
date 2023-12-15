@@ -16,9 +16,7 @@ export class LoaderInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
              tap((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    setTimeout(() => {
-                    this.loaderService.requestEnded();
-                    },90);
+                    this.loaderService.requestEnded();   
                 }
              })
         );

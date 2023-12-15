@@ -32,6 +32,7 @@ import { SearchlistComponent } from './components/searchlist/searchlist.componen
 
 
 
+
 const routes : Routes = [
   {path: '', component: MainComponent, children: [
     {path: '', component: MovielistComponent},
@@ -79,7 +80,7 @@ const routes : Routes = [
     NgxStarRatingModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
   ],
   providers: [AccountService,MovieService,LoaderService,
     {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true},
