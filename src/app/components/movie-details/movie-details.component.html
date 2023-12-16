@@ -1,7 +1,6 @@
-<div *ngIf="!loading" style="height: 600px; align-items: center;">
-<img class="backdrop" [style.background]="'rgb(' + movie.backdrop_path[0] + ',' + movie.backdrop_path[1] + ',' + movie.backdrop_path[2] +  ',' + 0.5 + ')'" loading="eager">
+<div *ngIf="!loading" style="height: 600px; align-items: center;" [style.background]="'rgb(' + movie.backdrop_path[0] + ',' + movie.backdrop_path[1] + ',' + movie.backdrop_path[2] + ',' + 0.4 + ')'">
 <div class="container movie-details" style="display: flex;">
-    <img src={{movie.poster_path}} class="img-fluid" style="height: 330px !important;">
+    <img src={{movie.poster_path}} class="img-fluid" style="height: 390px;">
     <div class="movie-detail">
         <h1 style="color: white; font-weight: bold;">{{movie.title}}</h1>
         <h5 style="color: #9fa2a4;">{{movie.release_date}}</h5>

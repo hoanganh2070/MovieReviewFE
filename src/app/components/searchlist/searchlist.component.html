@@ -10,13 +10,9 @@
     <div class="glider-track">
       <div *ngFor="let movie of SearchList,index as i" class="card glider-slide" [attr.data-gslide]="i">
         <a routerLink="/movie/{{movie.id}}" class="movie-poster">
-          <img [src]="movie.poster_path" class="card-img-top" alt="..." loading="lazy">
+          <img [src]="movie.poster_path" class="card-img-top" alt="..." loading="lazy" style="border-radius: 0;">
         </a>
         <div class="card-body">
-          <div>
-            <img src="assets/image/star.png" width="17px">
-            {{movie.vote_average}}
-          </div>
           <h5 style="color: beige;">{{movie.title}}</h5>
         </div>
       </div>

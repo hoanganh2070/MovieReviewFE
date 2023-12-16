@@ -16,7 +16,7 @@ export class MovieDetailsComponent implements OnInit,AfterViewInit{
   movie : Movie ;
   private movieService : MovieService;
   private route : ActivatedRoute;
-  loading : boolean = true;
+  loading : boolean = false;
   trailer : SafeResourceUrl = '';
   color1 : number = 197;
   
@@ -39,20 +39,17 @@ export class MovieDetailsComponent implements OnInit,AfterViewInit{
     this.route.params.subscribe(params => {
       let id = params['id'];
       this.movieService.getMovieDetails(id).subscribe(
-         response => {
-            this.movie = response;          
-            // @ts-ignore
-            this.formGroup.get('rating').setValue(0);
-            
-            this.loading = false;
-         }
-        )
+        (data : any) => {
+          this.movie = data;
+        }
+        );
+        this.movieService.getMovieTrailer(params['id']).subscribe((data : any) => {
+          this.trailer = data.url;
+        });
     });
-    this.route.params.subscribe(params => {
-      this.movieService.getMovieTrailer(params['id']).subscribe((data : any) => {
-        this.trailer = data.url;
-      });
-    });
+     // @ts-ignore
+     this.formGroup.get('rating').setValue(0);
+   
   
 
   }
