@@ -8,17 +8,25 @@ export class LoaderInterceptor implements HttpInterceptor {
     constructor(private loaderService: LoaderService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.loaderService.requestStarted();
+        // Check if the request method is GET
+        if (request.method === 'GET' ) {
+            this.loaderService.requestStarted();
+        }
+
+        // Continue processing the request
         return this.handler(next, request);
     }
 
-    handler(next : any, request : any) {
+    handler(next: HttpHandler, request: HttpRequest<any>): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(
-             tap((event: HttpEvent<any>) => {
+            tap((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    this.loaderService.requestEnded();   
+                    // Check if the request method is GET before ending the loader
+                    if (request.method === 'GET') {
+                        this.loaderService.requestEnded();
+                    }
                 }
-             })
+            })
         );
     }
 }

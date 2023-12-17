@@ -92,6 +92,15 @@ body::-webkit-scrollbar-thumb{
 
 }
 
+.glider-track .card{
+  background: #1a1b1b;
+}
+
+.glider.track .card-body{
+
+  background: #1a1b1b;
+}
+
 .card-body{
   border-radius: 15px;
   background: #1a1b1b;
@@ -185,7 +194,6 @@ body::-webkit-scrollbar-thumb{
 }
 .glider .card{
   color: #9fa2a4;
-  background-color: #212529 !important;
   width: 200px !important;
   margin-left: 7px !important;
   margin-right: 7px !important;

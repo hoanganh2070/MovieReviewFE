@@ -70,7 +70,7 @@ const routes : Routes = [
     SearchlistComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,{ scrollPositionRestoration: 'enabled' }),
     BrowserModule,
     HttpClientModule,
     NgOptimizedImage,
