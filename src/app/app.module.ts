@@ -19,7 +19,6 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
 
 
 import { CreditsComponent } from './components/credits/credits.component';
-import { ImagesComponent } from './components/images/images.component';
 import {NgxStarRatingModule} from "ngx-star-rating";
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -63,7 +62,6 @@ const routes : Routes = [
     MovielistComponent,
     MovieDetailsComponent,
     CreditsComponent,
-    ImagesComponent,
     FooterComponent,
     ProfileComponent,
     LoaderComponent,

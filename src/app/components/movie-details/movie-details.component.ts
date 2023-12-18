@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/model/movie.model';
+import { Rate } from 'src/app/model/rate.model';
 import { WatchList } from 'src/app/model/watchlist.model';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -17,11 +18,13 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
   movie : Movie ;
   private movieService : MovieService;
   private route : ActivatedRoute;
+  private router : Router;
   loading : boolean = true;
   trailer : SafeResourceUrl = '';
   color1 : number = 197;
   watchlist : boolean = false;
   loadingWatchlist : boolean = true;
+  imageUrls : string[] = []; 
   
   
   showRatingStar : boolean = false;
@@ -30,9 +33,10 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
   });
 
 
-  constructor(movieService : MovieService, route : ActivatedRoute) {
+  constructor(movieService : MovieService, route : ActivatedRoute,router : Router) {
     this.movieService = movieService;
     this.route = route;
+    this.router = router;
    
   }
   
@@ -41,12 +45,16 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
       let id = params['id'];
       this.movieService.getMovieDetails(id).subscribe(
         (data : any) => {
-          this.movie = data;
+          this.movie = data['movie'];
+          this.trailer = data['url'];
         }
         );
-        this.movieService.getMovieTrailer(params['id']).subscribe((data : any) => {
-          this.trailer = data.url;
-        });
+        this.movieService.getMovieImages(this.route.snapshot.params['id']).subscribe(
+          data =>{
+            this.imageUrls = data;
+          }
+         );
+       
        
     });
     this.loading = false;
@@ -62,6 +70,10 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
     if(localStorage.getItem('token') != null)
      this.route.params.subscribe(params => {
       let id = params['id'];
+      this.movieService.getRate({'movieId' : id}).subscribe((data : any) => {
+        //@ts-ignore
+         this.formGroup.get('rating').setValue(data['rate']);
+      })
       setTimeout(() => {
       this.movieService.checkMovieInWatchlist({Id : id}).subscribe({
         next: data => {
@@ -82,11 +94,28 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
       this.loadingWatchlist = false;
   }
   show(){
+    if(localStorage.getItem('token') == null){
+      this.router.navigateByUrl('account/signin');
+      return;
+    }
     if(this.showRatingStar == true)
       this.showRatingStar = false;
     else
        this.showRatingStar = true;
   }
+
+  rateMovie(){
+    setTimeout(() => {
+      //@ts-ignore
+      let rating :number = this.formGroup.get('rating')?.value;
+      const rate = new Rate(this.movie.id, rating);
+      this.movieService.rateMovie(rate).subscribe();
+    }, 300);
+    
+
+   
+  }
+
   playTrailer(){
     //@ts-ignore
      document.getElementById('trailer').style.display = "block";
@@ -106,6 +135,12 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
 
 
   addWishList(){
+
+   if(localStorage.getItem('token') == null){
+     this.router.navigateByUrl('account/signin');
+     return;
+   }
+
    if(this.watchlist == true){
         console.log("delete from watchlist");
         this.movieService.deleteMovieFromWatchlist({Id : this.movie.id}).subscribe();

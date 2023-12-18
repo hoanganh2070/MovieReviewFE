@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Movie } from '../model/movie.model';
 import { WatchList } from '../model/watchlist.model';
+import { Rate } from '../model/rate.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,22 @@ export class MovieService {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
     return this.httpClient.post(this.baseUrl+'watchlist/exist' ,movie, {headers: headers});
+   }
+
+   rateMovie(movie : Rate) : Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
+    return this.httpClient.post(this.baseUrl+'rate' ,movie, {headers: headers});
+   }
+
+   getRate(movie : any) : Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
+    return this.httpClient.post(this.baseUrl+'rate/get' ,movie, {headers: headers});
    }
 
    deleteMovieFromWatchlist(movie : any) : Observable<any>{

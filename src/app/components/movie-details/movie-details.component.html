@@ -82,8 +82,8 @@
                 <div>Rate</div>
             
             </div>
-            <form *ngIf="showRatingStar" class="rating-form" [formGroup]="formGroup">
-                <ngx-star-rating formControlName="rating" [id]="'rating'"></ngx-star-rating>
+            <form *ngIf="showRatingStar" class="rating-form" [formGroup]="formGroup" >
+                <ngx-star-rating (click)="rateMovie()" formControlName="rating" [id]="'rating'" ></ngx-star-rating>
             </form>
             </div>
             <div class="play-button" (click)="playTrailer()">
@@ -110,5 +110,10 @@
         
     </div>
 </div>
-<app-images *ngIf="!loading"></app-images>
+<div *ngIf="!loading" class="container mt-5">
+  <h2 style="color: #3fefe6;">Media</h2>
+ <div class="scroll-container">
+     <img *ngFor="let url of imageUrls" loading="lazy" [src]="url" alt="Image" width="533" height="300">
+ </div>
+ </div>
 
