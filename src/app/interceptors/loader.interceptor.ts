@@ -10,7 +10,6 @@ export class LoaderInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // Check if the request method is GET
         if (request.method === 'GET' ) {
-            console.log(request.url);
             this.loaderService.requestStarted();
         }
 

@@ -24,7 +24,8 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
   color1 : number = 197;
   watchlist : boolean = false;
   loadingWatchlist : boolean = true;
-  imageUrls : string[] = []; 
+  imageUrls : string[] = [];
+  rate : string = 'Rate'; 
   
   
   showRatingStar : boolean = false;
@@ -67,12 +68,16 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    if(localStorage.getItem('token') != null)
+    if(localStorage.getItem('token') != null){
+     this.rate = '';
      this.route.params.subscribe(params => {
       let id = params['id'];
       this.movieService.getRate({'movieId' : id}).subscribe((data : any) => {
         //@ts-ignore
          this.formGroup.get('rating').setValue(data['rate']);
+         if(data['rate'] == null)
+          this.rate = 'Not Rated';
+        
       })
       setTimeout(() => {
       this.movieService.checkMovieInWatchlist({Id : id}).subscribe({
@@ -83,13 +88,15 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
             this.watchlist = true;
           else
             this.watchlist = false;
+          //@ts-ignore
+          this.rate = this.formGroup.get('rating')?.value;
         },
         error: error => {
           console.log(error);
         }
       })
       }, 500);
-     })
+     })}
     else 
       this.loadingWatchlist = false;
   }
@@ -109,6 +116,7 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
       //@ts-ignore
       let rating :number = this.formGroup.get('rating')?.value;
       const rate = new Rate(this.movie.id, rating);
+      this.rate = rating.toString();
       this.movieService.rateMovie(rate).subscribe();
     }, 300);
     

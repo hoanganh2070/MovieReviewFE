@@ -27,10 +27,6 @@ export class MovieService {
    getMovieDetails(id : number) : Observable<Movie>{
     return this.httpClient.get<Movie>(this.baseUrl+id);
    }
-   getMovieTrailer(id : number) : Observable<any>{
-    return this.httpClient.get(this.baseUrl+id+'/video');
-   }
-
    getMovieImages(id : number) : Observable<any>{
     return this.httpClient.get(this.baseUrl+id+'/images');
    }
