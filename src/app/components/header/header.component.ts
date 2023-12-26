@@ -28,6 +28,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(window.localStorage.getItem('token') !== null){
+      this.signedIn = true;
+    }
   }
 
 

@@ -55,16 +55,12 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
             this.imageUrls = data;
           }
          );
-       
-       
+         
     });
     this.loading = false;
      // @ts-ignore
      this.formGroup.get('rating').setValue(0);
     
-
-    
-
   }
 
   ngAfterViewInit(): void {
@@ -75,9 +71,7 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
       this.movieService.getRate({'movieId' : id}).subscribe((data : any) => {
         //@ts-ignore
          this.formGroup.get('rating').setValue(data['rate']);
-         if(data['rate'] == null)
-          this.rate = 'Not Rated';
-        
+       
       })
       setTimeout(() => {
       this.movieService.checkMovieInWatchlist({Id : id}).subscribe({
@@ -90,6 +84,8 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
             this.watchlist = false;
           //@ts-ignore
           this.rate = this.formGroup.get('rating')?.value;
+          if(this.rate == '0')
+            this.rate = 'Rate';
         },
         error: error => {
           console.log(error);

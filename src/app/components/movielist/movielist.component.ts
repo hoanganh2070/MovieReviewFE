@@ -54,7 +54,7 @@ export class MovielistComponent implements OnInit, AfterViewInit{
         }
     });      
       //@ts-ignore
-    new Glider(document.getElementById('glider'), {
+    new Glider(document.getElementById('glider3'), {
         draggable: true,
         skipTrack: true,
         arrows: {

@@ -32,20 +32,21 @@ import { SearchlistComponent } from './components/searchlist/searchlist.componen
 
 
 
+
 const routes : Routes = [
   {path: '', component: MainComponent, children: [
     {path: '', component: MovielistComponent},
     {path: 'movie/:id', component: MovieDetailsComponent},
-    {path: 'profile', component: ProfileComponent,
-    canActivate : [authGuard]
-    },
     {path: 'search/:query', component: SearchlistComponent}
 
-  ]},
+  ],
+},
   {path: 'account', component: AccountComponent, children: [
       {path: 'signin', component: SigninComponent},
-      {path: 'signup', component: SignupComponent}
-      
+      {path: 'signup', component: SignupComponent},
+      {path: 'profile', component: ProfileComponent,
+    canActivate : [authGuard]
+    },
     ]},
   {path :'demo', component: FooterComponent}
   

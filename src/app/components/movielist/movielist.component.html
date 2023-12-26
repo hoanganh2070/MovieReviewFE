@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <div id="glider" class="container glider draggable">
+  <div id="glider3" class="container glider draggable">
     <div class="glider-track">
       <div *ngFor="let movie of topratedMovies,index as i" class="card glider-slide" [attr.data-gslide]="i">
         <a  (click)="movieDetails(movie.id,movie.title)" class="movie-poster">
