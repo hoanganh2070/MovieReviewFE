@@ -46,6 +46,18 @@ export class AccountService {
     return this.httpClient.get(this.baseUrl+'profile', {headers: headers});
   }
 
+  public uploadFile(file: File) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.httpClient.post('http://localhost:4000/api/cloudinary/upload', formData,{headers: headers});
+  }
+
+
+
 
   public googleSignin(): void {
     window.open(this.googleAuthUrl, '_self');

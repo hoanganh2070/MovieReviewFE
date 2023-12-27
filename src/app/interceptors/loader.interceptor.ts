@@ -9,7 +9,7 @@ export class LoaderInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // Check if the request method is GET
-        if (request.method === 'GET' ) {
+        if (request.method === 'GET' || request.url ==='http://localhost:4000/api/cloudinary/upload' ) {
             this.loaderService.requestStarted();
         }
 
@@ -24,6 +24,11 @@ export class LoaderInterceptor implements HttpInterceptor {
                     // Check if the request method is GET before ending the loader
                     if (request.method === 'GET') {
                         this.loaderService.requestEnded();
+                    }
+                    else if(request.url ==='http://localhost:4000/api/cloudinary/upload'){
+                        setTimeout(() => {
+                            this.loaderService.requestEnded();
+                        }, 700);
                     }
                 }
             })

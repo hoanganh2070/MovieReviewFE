@@ -33,12 +33,10 @@
         </li>
         <li *ngIf="signedIn" id="account" class="nav-item">
           <a class="nav-link" routerLink="/account/profile">
-            <span class="material-icons" style="color: #3feee5; font-size: 45px;">account_circle</span>
+            <span *ngIf="!avatar" class="material-icons" style="color: #3feee5; font-size: 45px;">account_circle</span>
+            <img *ngIf="avatar" src="{{avatarurl}}" width="50" height="50" alt="" style="border-radius: 50%; object-fit: cover;">
           </a>
         </li>
-
-
-
       </ul>
     </div>
   </div>

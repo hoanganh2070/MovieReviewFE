@@ -47,7 +47,7 @@ export class SigninComponent{
           next: response => {
             if(response.authenticated){
 
-              this.Success(response.accessToken).then(() => {
+              this.Success(response.accessToken,response.avatar).then(() => {
                 const redirect = window.sessionStorage.getItem('redirect');
                 this.router.navigateByUrl(redirect || "/")
                 window.sessionStorage.removeItem('redirect');
@@ -65,8 +65,9 @@ export class SigninComponent{
 
     }
 
-    async Success(key : any){
+    async Success(key : any,avatar: any){
       window.localStorage.setItem('token', key);
+      window.localStorage.setItem('avatar', avatar);
     }
 
     googleSignIn(){

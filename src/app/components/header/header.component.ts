@@ -14,12 +14,20 @@ export class HeaderComponent implements OnInit {
 
   public query : string;
 
+  public avatar : boolean = false;
+  
+  public avatarurl : string;
+
 
 
   constructor(private accountService : AccountService,private router : Router,private titleService : Title) { 
     this.router = router;
     if(window.localStorage.getItem('token') !== null){
       this.signedIn = true;
+    }
+    if(window.localStorage.getItem('avatar') !== null){
+      this.avatar = true;
+      this.avatarurl = window.localStorage.getItem('avatar')!;
     }
   }
 
