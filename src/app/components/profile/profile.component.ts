@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/user.model';
+import { WatchList } from 'src/app/model/watchlist.model';
 import { AccountService } from 'src/app/services/account.service';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +17,12 @@ export class ProfileComponent implements OnInit {
   selectedFile: File | null = null;
   user : User;
   username : string;
+  watchlist : WatchList[];
   
 
-   constructor(private accountService: AccountService,private router : Router) {
+   constructor(private accountService: AccountService,private movieService : MovieService,private router : Router) {
         this.accountService = accountService;
+        this.movieService = movieService;
         this.router=router;
    }
 
@@ -32,7 +36,10 @@ export class ProfileComponent implements OnInit {
             const preview = document.getElementById('preview')! as HTMLImageElement;
             preview.src = data['avatarurl'];
            }
-        })
+        });
+      this.movieService.getWatchlist().subscribe(data => {
+        this.watchlist = data;
+      });
   }
   async signOut(){
     return new Promise((resolve,reject) => {
@@ -66,9 +73,13 @@ export class ProfileComponent implements OnInit {
   save(){
     if(this.selectedFile !== null)
     this.accountService.uploadFile(this.selectedFile).subscribe(data => {
-      
+        
+      return new Promise((resolve,reject) => {
         window.localStorage.setItem('avatar',data.avatar);
-        window.location.reload();
+        resolve(true);
+     }).then(() => {
+        this.router.navigateByUrl('/profile');
+     }); 
   });
   }
 }

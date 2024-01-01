@@ -82,4 +82,12 @@ export class MovieService {
     };
     return this.httpClient.delete(this.baseUrl+'watchlist/delete', options);
    }
+
+   getWatchlist() : Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
+    return this.httpClient.get(this.baseUrl+'watchlist', {headers: headers});
+   }
 }

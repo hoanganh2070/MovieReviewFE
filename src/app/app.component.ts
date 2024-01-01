@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as Buffer from 'buffer';
 
 
 @Component({
@@ -23,7 +22,8 @@ export class AppComponent implements OnInit{
     }
     if(window.localStorage.getItem('image') === null){
       const ck = document.cookie.split(';')[0].split('=')[1];
-      let avatar = atob(ck);
+      console.log(ck);
+      let avatar = atob(decodeURIComponent(ck));
       console.log(avatar);
       if(avatar !== undefined){
         window.localStorage.setItem('avatar',avatar);
