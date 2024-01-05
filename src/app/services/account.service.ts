@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Account} from "../model/account.model";
 import { User } from '../model/user.model';
@@ -18,6 +18,9 @@ export class AccountService {
   private googleAuthUrl : string = this.baseUrl + 'google/login';
 
   private facebookAuthUrl : string = this.baseUrl + 'facebook/redirect';
+
+  private avatarurl : BehaviorSubject<string> = new BehaviorSubject<string>("");
+  currentAvatarUrl = this.avatarurl.asObservable();
 
 
   public changeStatus(){
@@ -65,6 +68,10 @@ export class AccountService {
 
   public facebookSignin(): void {
     window.open(this.facebookAuthUrl, '_self');
+  }
+
+  public updateAvatarUrl(url: string) {
+    this.avatarurl.next(url);
   }
    
   loggedIn() {

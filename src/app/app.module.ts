@@ -28,6 +28,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { SearchlistComponent } from './components/searchlist/searchlist.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -80,6 +81,7 @@ const routes : Routes = [
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     NgOptimizedImage,
+    InfiniteScrollModule
   ],
   providers: [AccountService,MovieService,LoaderService,
     {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true},

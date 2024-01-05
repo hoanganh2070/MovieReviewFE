@@ -27,7 +27,8 @@ export class HeaderComponent implements OnInit {
     }
     if(window.localStorage.getItem('avatar') !== null){
       this.avatar = true;
-      this.avatarurl = window.localStorage.getItem('avatar')!;
+      this.accountService.updateAvatarUrl(window.localStorage.getItem('avatar')!);
+      this.accountService.currentAvatarUrl.subscribe(avatarurl => this.avatarurl = avatarurl);
     }
   }
 

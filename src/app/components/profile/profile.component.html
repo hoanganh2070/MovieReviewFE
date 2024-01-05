@@ -26,7 +26,9 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input (click)="save()" type="submit" class="profile-edit-btn" name="btnAddMore" value="Save"/>
+                <button (click)="save()" type="submit" id="save-btn" class="profile-edit-btn" name="btnAddMore">
+                    Save
+                </button>
             </div>
         </div>
         <div class="row">
@@ -74,7 +76,7 @@
                 <div style="color: #3feee5; font-size: 27px; font-weight: bold;" class="mt-5 mb-2">Your watchlist</div>
                 <div class="scroll-container" style="background: transparent;">
                     <a *ngFor="let movie of watchlist" routerLink="../../movie/{{movie.movieId}}">
-                    <img  loading="lazy" [src]="movie.moviePoster" width="110" height="165" alt="Image" >
+                    <img style="margin-right: 4px; border-radius: 10px; margin-bottom: 4px;" loading="lazy" [src]="movie.moviePoster" width="110" height="165" alt="Image" >
                     </a>
                 </div>
             </div>

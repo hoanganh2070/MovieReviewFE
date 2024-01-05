@@ -363,6 +363,9 @@ div.scroll-container {
   text-overflow: clip;
 
 }
+.scroll-container{
+  background: transparent !important;
+}
 .glider-track .card{
   margin : 0;
   border: none !important;
@@ -374,7 +377,7 @@ div.scroll-container {
 
 }
 .scroll-container::-webkit-scrollbar{
-  height: 7px ;
+  height: 6px ;
   border-radius: 10px;
 }
 .scroll-container::-webkit-scrollbar-thumb{
@@ -593,11 +596,12 @@ a{
   color: #fd4544;
 }
 .profile-edit-btn{
+  font-size: 18px;
   border: none;
   border-radius: 1.5rem;
   width: 70%;
   padding: 2%;
-  font-weight: 600;
+  font-weight: 700;
   color: #fd4544;
   cursor: pointer;
 }
@@ -658,3 +662,54 @@ a{
 .photo-btn:hover{
   background: #fd4544 !important;
 }
+
+.staff-card{
+  display: inline-block;
+  margin-right: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.staff-card img{
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.staff-card div{
+  width: 138px; 
+  height: 70px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: beige; 
+  background: #1e2125;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#save-btn .loader{
+  margin-top: 2px;
+}
+
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 5px solid #FFF;
+  border-bottom-color: #FF3D00;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 

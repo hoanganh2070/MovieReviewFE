@@ -160,10 +160,55 @@
         
     </div>
 </div>
-<div *ngIf="!loading" class="container mt-5">
-  <h2 style="color: #3fefe6;">Media</h2>
- <div class="scroll-container">
+<div
+  infinite-scroll 
+  [infiniteScrollDistance]="0"
+  [infiniteScrollThrottle]="500"
+  (scrolled)="loadMedia()">
+</div>
+<div class="container mt-5">
+ <h2 style="color: #3fefe6; font-weight: bold;">Media</h2>
+ <div *ngIf="show1" class="scroll-container">
      <img *ngFor="let url of imageUrls" loading="lazy" [src]="url" alt="Image" width="533" height="300">
  </div>
- </div>
+</div>
+<div
+  infinite-scroll 
+  [infiniteScrollDistance]="0"
+  [infiniteScrollThrottle]="500"
+  (scrolled)="loadStaff()">
+</div>
+<div *ngIf="show2" class="container mt-5">
+<h2 style="color: #3fefe6; font-weight: bold;">Staff</h2>
+<div class="scroll-container">
+  <span class="staff-card" *ngFor="let staff of staffList">
+    <img style="object-fit: contain;" loading="lazy" [src]="staff.profile_path" width="138" height="175" alt="Image">
+    <div>
+        {{staff.name}}
+    </div>
+  </span>
+</div>
+</div>
+
+<div
+  infinite-scroll
+  [infiniteScrollDistance]="0"
+  [infiniteScrollThrottle]="500"
+  (scrolled)="loadRecommendations()">
+</div>
+<div class="container mt-5">
+  <h2 *ngIf="show3" style="color: #3fefe6; font-weight: bold;">Recommendations</h2>
+  <div *ngIf="show3" class="scroll-container" style="background: transparent;">
+    <a *ngFor="let movie of recommendationList">
+      <img style="margin-right: 4px;" loading="lazy" [src]="movie.poster_path" width="220" height="350" alt="Image" (click)="redirect(movie.id)">
+    </a>
+</div>
+</div>
+
+<div *ngIf="scrollload && end" style="display: flex; justify-content: center; align-items: center;">
+  <div>
+    <mat-progress-spinner [mode]="'indeterminate'" style="width: 50px !important;"></mat-progress-spinner>
+  </div>
+</div>
+
 

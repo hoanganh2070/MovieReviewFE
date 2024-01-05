@@ -4,6 +4,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/model/movie.model';
 import { Rate } from 'src/app/model/rate.model';
+import { Staff } from 'src/app/model/staff.model';
 import { WatchList } from 'src/app/model/watchlist.model';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -25,7 +26,14 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
   watchlist : boolean = false;
   loadingWatchlist : boolean = true;
   imageUrls : string[] = [];
+  recommendationList : Movie[] = [];
   rate : string = 'Rate'; 
+  scrollload : boolean = false;
+  show1 : boolean = false;
+  show2 : boolean = false;
+  show3 : boolean = false;
+  end : boolean = true;
+  staffList : Staff[] = [];
   
   
   showRatingStar : boolean = false;
@@ -38,10 +46,12 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
     this.movieService = movieService;
     this.route = route;
     this.router = router;
+    console.log('constructor');
    
   }
   
   ngOnInit(): void {
+    console.log('init');
     this.route.params.subscribe(params => {
       let id = params['id'];
       this.movieService.getMovieDetails(id).subscribe(
@@ -49,18 +59,12 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
           this.movie = data['movie'];
           this.trailer = data['url'];
         }
-        );
-        this.movieService.getMovieImages(this.route.snapshot.params['id']).subscribe(
-          data =>{
-            this.imageUrls = data;
-          }
-         );
-         
+        );   
     });
     this.loading = false;
      // @ts-ignore
      this.formGroup.get('rating').setValue(0);
-    
+
   }
 
   ngAfterViewInit(): void {
@@ -76,7 +80,6 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
       setTimeout(() => {
       this.movieService.checkMovieInWatchlist({Id : id}).subscribe({
         next: data => {
-          console.log(data);
           this.loadingWatchlist = false;
           if(data['exist'] == true)
             this.watchlist = true;
@@ -167,6 +170,60 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
     this.watchlist = true;
     };
     
+   }
+
+
+   loadMedia(){
+    this.scrollload = true;
+    this.route.params.subscribe(params => {
+      let id = params['id'];
+        this.movieService.getMovieImages(this.route.snapshot.params['id']).subscribe(
+          data =>{
+            this.imageUrls = data;
+            this.scrollload = false;
+            this.show1 = true;
+          }
+         );
+    });
+
+   }
+
+   loadRecommendations(){
+    this.scrollload = true;
+    this.route.params.subscribe(params => {
+      let id = params['id'];
+        this.movieService.getRecommendations(this.route.snapshot.params['id']).subscribe(
+          data =>{
+            this.recommendationList = data;
+            this.scrollload = false;
+            this.show3 = true;
+            this.end = false;
+          }
+         );
+    });
+   }
+
+
+   loadStaff(){
+    this.scrollload = true;
+    this.route.params.subscribe(params => {
+      let id = params['id'];
+        this.movieService.getStaff(this.route.snapshot.params['id']).subscribe(
+          data =>{
+            this.staffList = data;
+            this.scrollload = false;
+            this.show2 = true;
+          }
+         );
+    });
+   }
+
+   redirect(id : number){
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+  }
+  this.router.onSameUrlNavigation = 'reload';
+  this.router.navigateByUrl('movie/' + id);
    }
 
 }

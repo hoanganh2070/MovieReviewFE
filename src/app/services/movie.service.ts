@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Movie } from '../model/movie.model';
 import { WatchList } from '../model/watchlist.model';
 import { Rate } from '../model/rate.model';
+import { Staff } from '../model/staff.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,12 @@ export class MovieService {
 
    getUpcomingMovies() : Observable<Movie[]>{
     return this.httpClient.get<Movie[]>(this.baseUrl+'upcoming');
+   }
+   getRecommendations(id : number) : Observable<Movie[]>{
+    return this.httpClient.get<Movie[]>(this.baseUrl+id+'/recommendations');
+   }
+   getStaff(id : number) : Observable<Staff[]>{
+    return this.httpClient.get<Staff[]>(this.baseUrl+id+'/credits');
    }
 
    searchMovies(query : string) : Observable<Movie[]>{

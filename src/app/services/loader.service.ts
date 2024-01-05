@@ -14,15 +14,10 @@ export class LoaderService {
   }
 
   requestStarted() {
-    this.count++;
-    if (this.count === 1) {
       this.spinner$.next(true);
-    }
   }
 
   requestEnded() {
-    this.count=this.count-1;
-    if(this.count<=0)
       this.spinner$.next(false);
   
   }

@@ -72,14 +72,16 @@ export class ProfileComponent implements OnInit {
   }
   save(){
     if(this.selectedFile !== null)
+    {
+    document.getElementById('save-btn')!.innerHTML = '<span  id="loader" class="loader"></span>';
     this.accountService.uploadFile(this.selectedFile).subscribe(data => {
-        
-      return new Promise((resolve,reject) => {
         window.localStorage.setItem('avatar',data.avatar);
-        resolve(true);
-     }).then(() => {
-        this.router.navigateByUrl('/profile');
-     }); 
-  });
+        this.accountService.updateAvatarUrl(data.avatar);
+        const preview = document.getElementById('preview')! as HTMLImageElement;
+        preview.src = data.avatar;
+        document.getElementById('save-btn')!.innerHTML = 'Save';
+     });
+    }
   }
+  
 }

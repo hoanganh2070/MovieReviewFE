@@ -14,7 +14,6 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     if(window.localStorage.getItem('token') === null){
       const token = document.cookie.split(';')[0].split('=')[1];
-      console.log(token);
       if(token !== undefined){
         window.localStorage.setItem('token',token);
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -22,7 +21,6 @@ export class AppComponent implements OnInit{
     }
     if(window.localStorage.getItem('image') === null){
       const ck = document.cookie.split(';')[0].split('=')[1];
-      console.log(ck);
       let avatar = atob(decodeURIComponent(ck));
       console.log(avatar);
       if(avatar !== undefined){
