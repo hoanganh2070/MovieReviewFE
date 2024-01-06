@@ -47,5 +47,10 @@ export class HeaderComponent implements OnInit {
       this.titleService.setTitle('IMDb')
       this.router.navigate(['/']);
   }
+  profilePage(){
+    if(this.router.url !== '/account/profile'){
+      this.router.navigate(['account/profile']);
+    }
+  }
      
 }

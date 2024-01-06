@@ -177,46 +177,27 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
     this.scrollload = true;
     this.route.params.subscribe(params => {
       let id = params['id'];
-        this.movieService.getMovieImages(this.route.snapshot.params['id']).subscribe(
+      setTimeout( () => {this.movieService.getMovieImages(this.route.snapshot.params['id']).subscribe(
           data =>{
             this.imageUrls = data;
-            this.scrollload = false;
             this.show1 = true;
           }
          );
-    });
-
-   }
-
-   loadRecommendations(){
-    this.scrollload = true;
-    this.route.params.subscribe(params => {
-      let id = params['id'];
-        this.movieService.getRecommendations(this.route.snapshot.params['id']).subscribe(
-          data =>{
-            this.recommendationList = data;
-            this.scrollload = false;
-            this.show3 = true;
-            this.end = false;
-          }
-         );
-    });
-   }
-
-
-   loadStaff(){
-    this.scrollload = true;
-    this.route.params.subscribe(params => {
-      let id = params['id'];
-        this.movieService.getStaff(this.route.snapshot.params['id']).subscribe(
+         this.movieService.getStaff(this.route.snapshot.params['id']).subscribe(
           data =>{
             this.staffList = data;
             this.scrollload = false;
             this.show2 = true;
+            this.end = false;
+        
           }
          );
+        },1000);
     });
+
    }
+
+
 
    redirect(id : number){
     this.router.routeReuseStrategy.shouldReuseRoute = function () {

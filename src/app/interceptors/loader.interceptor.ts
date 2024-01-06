@@ -1,8 +1,8 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, finalize, tap } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { LoaderService } from "../services/loader.service";
-import { NavigationEnd, NavigationStart, Router, RouterEvent } from "@angular/router";
+import { NavigationStart, Router, RouterEvent } from "@angular/router";
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
@@ -30,12 +30,15 @@ export class LoaderInterceptor implements HttpInterceptor {
                 if (event instanceof HttpResponse) {
                     if (request.method === 'GET') {
                             this.loaderService.requestEnded();
+                            return;
                     }
                     else if(request.url ==='http://localhost:4000/api/cloudinary/upload'){
                         setTimeout(() => {
                             this.loaderService.requestEnded();
                         }, 700);
+                        return;
                     }
+                    
                 }
             })
         );
