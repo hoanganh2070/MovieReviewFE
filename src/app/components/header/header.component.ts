@@ -7,7 +7,7 @@ import { AccountService } from 'src/app/services/account.service';
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
 
   public signedIn : boolean = false;
@@ -25,23 +25,17 @@ export class HeaderComponent implements OnInit {
     if(window.localStorage.getItem('token') !== null){
       this.signedIn = true;
     }
+    this.accountService.currentAvatarUrl.subscribe(avatarurl => this.avatarurl = avatarurl);
+    this.accountService.currentIsThereAvatar.subscribe(avatar => this.avatar = avatar);
     if(window.localStorage.getItem('avatar') !== null){
-      this.avatar = true;
       this.accountService.updateAvatarUrl(window.localStorage.getItem('avatar')!);
-      this.accountService.currentAvatarUrl.subscribe(avatarurl => this.avatarurl = avatarurl);
     }
+    
   }
 
   searchMovie(){
         this.router.navigateByUrl('/search/'+this.query);
   }
-
-  ngOnInit(): void {
-    if(window.localStorage.getItem('token') !== null){
-      this.signedIn = true;
-    }
-  }
-
 
   homepage(){
       this.titleService.setTitle('IMDb')

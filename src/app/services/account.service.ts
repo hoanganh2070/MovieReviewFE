@@ -20,7 +20,10 @@ export class AccountService {
   private facebookAuthUrl : string = this.baseUrl + 'facebook/redirect';
 
   private avatarurl : BehaviorSubject<string> = new BehaviorSubject<string>("");
-  currentAvatarUrl = this.avatarurl.asObservable();
+  currentAvatarUrl : Observable<string> = this.avatarurl.asObservable();
+
+  private isThereAvatar : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  currentIsThereAvatar : Observable<boolean> = this.isThereAvatar.asObservable();
 
 
   public changeStatus(){
@@ -72,6 +75,13 @@ export class AccountService {
 
   public updateAvatarUrl(url: string) {
     this.avatarurl.next(url);
+    this.isThereAvatar.next(true);
+  }
+
+  public logout() {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('avatar');
+    this.isThereAvatar.next(false);
   }
    
   loggedIn() {

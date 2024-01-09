@@ -49,9 +49,11 @@ export class SignupComponent {
     }
     else{
       // @ts-ignore : Object is possibly 'null'.
-      let user = new User(firstname, lastname, email);
+      let user = new User(0,firstname, lastname, email);
       // @ts-ignore : Object is possibly 'null'.
       let account = new Account(username, password);
+
+      console.log(user);
 
       this.accountService.signup(user, account).subscribe(
         {next : response =>{

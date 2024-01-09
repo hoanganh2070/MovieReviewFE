@@ -43,8 +43,7 @@ export class ProfileComponent implements OnInit {
   }
   async signOut(){
     return new Promise((resolve,reject) => {
-      window.localStorage.removeItem('token');
-      window.localStorage.removeItem('avatar');
+      this.accountService.logout();
       resolve(true);
    }).then(() => {
       this.router.navigateByUrl('/');

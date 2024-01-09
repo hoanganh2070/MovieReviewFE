@@ -67,6 +67,7 @@ export class SigninComponent{
 
     async Success(key : any,avatar: any){
       window.localStorage.setItem('token', key);
+      if(avatar === null) return;
       window.localStorage.setItem('avatar', avatar);
     }
 
