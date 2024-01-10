@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
 import { AppComponent } from './app.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -16,8 +15,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MovielistComponent } from './components/movielist/movielist.component';
 import { MovieService } from './services/movie.service';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
-
-
 import { CreditsComponent } from './components/credits/credits.component';
 import {NgxStarRatingModule} from "ngx-star-rating";
 import { FooterComponent } from './components/footer/footer.component';
@@ -29,6 +26,7 @@ import { LoaderService } from './services/loader.service';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { SearchlistComponent } from './components/searchlist/searchlist.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
 
 
 
@@ -38,7 +36,8 @@ const routes : Routes = [
   {path: '', component: MainComponent, children: [
     {path: '', component: MovielistComponent},
     {path: 'movie/:id', component: MovieDetailsComponent},
-    {path: 'search/:query', component: SearchlistComponent}
+    {path: 'search/:query', component: SearchlistComponent},
+    {path:'chatbot', component: ChatbotComponent}
 
   ],
 },
@@ -67,7 +66,8 @@ const routes : Routes = [
     FooterComponent,
     ProfileComponent,
     LoaderComponent,
-    SearchlistComponent
+    SearchlistComponent,
+    ChatbotComponent
   ],
   imports: [
     RouterModule.forRoot(routes,{ scrollPositionRestoration: 'enabled' }),
