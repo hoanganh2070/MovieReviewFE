@@ -718,6 +718,18 @@ a{
   }
   }
 
+  .chatbox::-webkit-scrollbar-track{
+    background: inherit;
+  
+  }
+  .chatbox::-webkit-scrollbar{
+    width: 6px;
+  }
+  .chatbox::-webkit-scrollbar-thumb{
+    background: grey;
+  
+  }
+
   .chatbot{
     background: #1a1b1b;
     position: fixed;

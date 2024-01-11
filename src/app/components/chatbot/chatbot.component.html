@@ -3,18 +3,15 @@
     <header>
         <h3>Chatbot</h3>
     </header>
-<ul class="chatbox">
+<ul id="chatbox" class="chatbox">
     <li class="chat incoming">
         <span class="material-symbols-outlined">smart_toy</span>
         <p>Hi there <br> How can I help you ?</p>
     </li>
-    <li class="chat outcoming">
-        <p>Tell me about Spring boot</p>
-    </li>
 </ul>
-<div class="chat-input">
-    <textarea placeholder="Enter your message"></textarea>
-    <span id="send-btn" class="material-symbols-outlined">send</span>
+<div class="chat-input" (keyup.Enter)="send()">
+    <textarea id="input" placeholder="Enter your message"></textarea>
+    <span id="send-btn" class="material-symbols-outlined" (click)="send()">send</span>
 </div>
 </div>
 <button class="chatbot-toggler" (click)="showChatBot()">

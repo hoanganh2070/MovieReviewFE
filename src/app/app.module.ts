@@ -27,6 +27,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { SearchlistComponent } from './components/searchlist/searchlist.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 
 
@@ -51,6 +52,8 @@ const routes : Routes = [
   {path :'demo', component: FooterComponent}
   
 ]
+
+const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 
 @NgModule({
   declarations: [
@@ -81,7 +84,8 @@ const routes : Routes = [
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     NgOptimizedImage,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [AccountService,MovieService,LoaderService,
     {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true},
