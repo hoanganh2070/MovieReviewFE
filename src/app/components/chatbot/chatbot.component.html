@@ -15,7 +15,9 @@
 </div>
 </div>
 <button class="chatbot-toggler" (click)="showChatBot()">
-    <span *ngIf="!show" class="material-symbols-outlined" >mode_comment</span>
+    <span *ngIf="!show" >
+        <img src="assets/image/chatbot.png" alt="chatbot">
+    </span>
     <span *ngIf="show" class="material-symbols-outlined">close</span>
 </button>
 </div>

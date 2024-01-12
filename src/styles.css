@@ -339,7 +339,7 @@ body::-webkit-scrollbar-thumb{
 
 
 .trailer-frame{
-  z-index: 3;
+  z-index: 110;
   height: 100%;
   width: 100%;
   background: rgb(0,0,0, 0.8);

@@ -9,6 +9,7 @@ export class ChatbotComponent  {
 
   public show: boolean = false;
   public chase: number = 0;
+  public running: boolean = true;
   public currentMessage : HTMLElement;
   public chatbox : HTMLUListElement;
  
@@ -16,6 +17,7 @@ export class ChatbotComponent  {
   constructor(private socket : Socket) {
 
     this.socket.on('chatbot', (message :any) => {
+      if(message === '\0') this.running = true;
       this.handleMessage(message);
     });
     
@@ -23,7 +25,6 @@ export class ChatbotComponent  {
   
 
   handleMessage(message: any) {
-    console.log(this.chase)
     //@ts-ignore
     this.currentMessage.innerHTML = this.currentMessage?.innerHTML + message;
     this.chatbox.scrollTo(0, this.chatbox.scrollHeight);
@@ -38,6 +39,7 @@ export class ChatbotComponent  {
   }
 
   send(){
+    if(this.running == false) return;
     this.chase++;
     this.chatbox = document.getElementById('chatbox')! as HTMLUListElement;
     const mess = (document.getElementById("input") as HTMLInputElement);
@@ -48,6 +50,7 @@ export class ChatbotComponent  {
     this.chatbox.scrollTo(0, this.chatbox.scrollHeight);
     mess.value = "";
     this.socket.emit('chatbot', message);
+    this.running = false;
     //@ts-ignore
     this.chatbox.insertAdjacentHTML('beforeend',`<li class="chat incoming">
     <span class="material-symbols-outlined">smart_toy</span>
