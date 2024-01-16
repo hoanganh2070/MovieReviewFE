@@ -62,6 +62,15 @@ export class AccountService {
     return this.httpClient.post('http://localhost:4000/api/cloudinary/upload', formData,{headers: headers});
   }
 
+  public refresh(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('refreshtoken')
+    });
+    return this.httpClient.get('http://localhost:4000/api/auth/refreshToken', {headers: headers});
+    
+
+  }
+
 
 
 
@@ -81,6 +90,7 @@ export class AccountService {
   public logout() {
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('avatar');
+    window.localStorage.removeItem('refreshtoken');
     this.isThereAvatar.next(false);
   }
    

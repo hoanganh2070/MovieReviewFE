@@ -1,4 +1,5 @@
-<div *ngIf="!loading" style="height: 600px; align-items: center;" [style.background]="'rgb(' + movie.backdrop_path[0] + ',' + movie.backdrop_path[1] + ',' + movie.backdrop_path[2] + ',' + 0.4 + ')'">
+<div *ngIf="!loading">
+<div style="height: 600px; align-items: center;" [style.background]="'rgb(' + movie.backdrop_path[0] + ',' + movie.backdrop_path[1] + ',' + movie.backdrop_path[2] + ',' + 0.4 + ')'">
 <div class="container movie-details" style="display: flex;">
     <img src={{movie.poster_path}} class="img-fluid" style="height: 390px;">
     <div class="movie-detail">
@@ -189,6 +190,7 @@
   <div>
     <mat-progress-spinner [mode]="'indeterminate'" style="width: 50px !important;"></mat-progress-spinner>
   </div>
+</div>
 </div>
 
 

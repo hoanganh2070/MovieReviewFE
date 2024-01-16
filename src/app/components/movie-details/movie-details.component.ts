@@ -58,12 +58,13 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
         (data : any) => {
           this.movie = data['movie'];
           this.trailer = data['url'];
+          this.loading = false;
         }
         );   
     });
-    this.loading = false;
+    
      // @ts-ignore
-     this.formGroup.get('rating').setValue(0);
+    this.formGroup.get('rating').setValue(0);
 
   }
 
@@ -73,6 +74,7 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
      this.route.params.subscribe(params => {
       let id = params['id'];
       this.movieService.getRate({'movieId' : id}).subscribe((data : any) => {
+        if(!data) return;
         //@ts-ignore
          this.formGroup.get('rating').setValue(data['rate']);
        

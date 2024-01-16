@@ -1,11 +1,11 @@
 <app-header></app-header>
-<div class="container emp-profile">
+<div *ngIf="!loading" class="container emp-profile">
     <form method="post">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
                     <div class="profile-img">
-                    <img id="preview" src="assets/image/blank.png" width="200" height="200" alt=""/>
+                    <img id="preview" src="{{avatar}}" width="200" height="200" alt=""/>
                     <div class="file btn btn-lg btn-primary photo-btn" (change)="handleImage($event)">
                         Change Photo
                         <input id="imageInput" type="file" name="file" />

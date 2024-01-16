@@ -28,6 +28,7 @@ import { SearchlistComponent } from './components/searchlist/searchlist.componen
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 
@@ -89,6 +90,7 @@ const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
   ],
   providers: [AccountService,MovieService,LoaderService,
     {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: PRECONNECT_CHECK_BLOCKLIST, useValue: 'https://www.themoviedb.org'}
   ],
   bootstrap: [AppComponent]

@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
   user : User;
   username : string;
   watchlist : WatchList[];
+  loading : boolean = true;
+  avatar : string = '';
   
 
    constructor(private accountService: AccountService,private movieService : MovieService,private router : Router) {
@@ -31,11 +33,17 @@ export class ProfileComponent implements OnInit {
       this.accountService.getUser().subscribe(
         data => {
            this.user = data['user'];
+           console.log(this.user.id);
            this.username = data['username'];
            if(data['avatarurl'] !== null){
-            const preview = document.getElementById('preview')! as HTMLImageElement;
-            preview.src = data['avatarurl'];
+             this.avatar = data['avatarurl'];
            }
+           else{
+              this.avatar = 'assets/images/blank.png';
+           }
+           this.loading = false;
+          
+           
         });
       this.movieService.getWatchlist().subscribe(data => {
         this.watchlist = data;
