@@ -31,14 +31,7 @@ export class LoaderInterceptor implements HttpInterceptor {
                     if (request.method === 'GET') {
                             this.loaderService.requestEnded();
                             return;
-                    }
-                    else if(request.url ==='http://localhost:4000/api/cloudinary/upload'){
-                        setTimeout(() => {
-                            this.loaderService.requestEnded();
-                        }, 700);
-                        return;
-                    }
-                    
+                    }    
                 }
             })
         );

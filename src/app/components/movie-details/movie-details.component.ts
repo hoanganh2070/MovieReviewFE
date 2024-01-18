@@ -46,12 +46,10 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
     this.movieService = movieService;
     this.route = route;
     this.router = router;
-    console.log('constructor');
    
   }
   
   ngOnInit(): void {
-    console.log('init');
     this.route.params.subscribe(params => {
       let id = params['id'];
       this.movieService.getMovieDetails(id).subscribe(
@@ -91,13 +89,11 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
           this.rate = this.formGroup.get('rating')?.value;
           if(this.rate == '0')
             this.rate = 'Rate';
-        },
-        error: error => {
-          console.log(error);
         }
       })
       }, 500);
-     })}
+    })
+    }
     else 
       this.loadingWatchlist = false;
   }
@@ -130,7 +126,6 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
      document.getElementById('trailer').style.display = "block";
     //@ts-ignore
      document.getElementById('video')?.setAttribute('src', this.trailer);
-     console.log("play trailer");
   }
 
   
@@ -151,24 +146,12 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit{
    }
 
    if(this.watchlist == true){
-        console.log("delete from watchlist");
         this.movieService.deleteMovieFromWatchlist({Id : this.movie.id}).subscribe();
-        
         this.watchlist = false;
-        console.log(this.watchlist)
    }
    else{
     const moviedto = new WatchList(this.movie.id, this.movie.title, this.movie.poster_path);
-    console.log(moviedto);
-    this.movieService.addMovieToWatchlist(moviedto).subscribe({
-      next: data => {
-        console.log(data);
-        console.log("added to watchlist");
-      },
-      error: error => {
-        console.log(error);
-      }
-    })
+    this.movieService.addMovieToWatchlist(moviedto).subscribe();
     this.watchlist = true;
     };
     

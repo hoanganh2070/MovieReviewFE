@@ -39,7 +39,9 @@ export class HeaderComponent {
 
   homepage(){
       this.titleService.setTitle('IMDb')
-      this.router.navigate(['/']);
+      if(this.router.url !== '/'){
+        this.router.navigate(['/']);
+      }
   }
   profilePage(){
     if(this.router.url !== '/account/profile'){

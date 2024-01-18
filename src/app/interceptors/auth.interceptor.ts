@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 
 
 
 import { Observable, throwError } from 'rxjs';
-import { catchError} from 'rxjs/operators';
+import { catchError, switchMap} from 'rxjs/operators';
 import { AccountService } from '../services/account.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private isRefreshing = false;
 
   constructor(
     private authService: AccountService,
@@ -26,7 +25,6 @@ export class AuthInterceptor implements HttpInterceptor {
           error instanceof HttpErrorResponse &&
           error.status === 401
         ) {
-          console.log('401 error');
           return this.handle401Error(req, next);
         }
 
@@ -35,17 +33,22 @@ export class AuthInterceptor implements HttpInterceptor {
     );
   }
 
-  private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler) {      
+    return  this.authService.refresh().pipe(
+        switchMap((res) => {
+          const token = res['accessToken'];
+          window.localStorage.setItem('token', token);
+          window.localStorage.setItem('refreshToken', res['refreshToken']);
+          request = request.clone({
+            setHeaders: {
+              Authorization: `Bearer ${token}`,
+            }
+          });
+          return next.handle(request);
+        })
+      )
       
-        this.authService.refresh().subscribe((res) => {
-          console.log(res);
-           window.localStorage.setItem('token', res.accessToken);
-           window.localStorage.setItem('refreshtoken', res.refreshToken);
-        });
-
-      request.headers.set('Authorization', `Bearer ${window.localStorage.getItem('token')}`);
-      return next.handle(request);
+    
   }
 }
 
